@@ -59,7 +59,6 @@ document.getElementById('clearBtn').addEventListener('click', () => {
 });
 
 
-
 // --------------------------------------------------------------------------------
 
 // 2️⃣ Load artifacts (PCA + classifier JSON)
