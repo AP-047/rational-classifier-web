@@ -73,3 +73,9 @@ button:hover {
   font-size: 0.9em;
   color: #666;
 }
+
+.disclaimer {
+  font-size: 0.9em;
+  color: #555;
+  margin-top: 0.5em;
+}
