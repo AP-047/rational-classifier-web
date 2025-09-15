@@ -1,5 +1,3 @@
-// app.js
-
 // 1️⃣ Canvas drawing setup
 const canvas = document.getElementById('drawCanvas');
 const ctx    = canvas.getContext('2d');
@@ -8,7 +6,7 @@ const ctx    = canvas.getContext('2d');
 ctx.fillStyle   = 'black';
 ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-// 2️⃣ Set stroke to white
+// Set stroke to white
 ctx.strokeStyle = 'white';
 ctx.lineWidth   = 20;
 ctx.lineCap     = 'round';
@@ -70,35 +68,34 @@ async function loadArtifacts() {
 }
 
 function getCanvasImage28() {
-  // 1) Capture the full-size drawing in temp canvas
+  // 1. Capture the full-size drawing in temp canvas
   const temp = document.createElement('canvas');
   temp.width = temp.height = 280;
   const tctx = temp.getContext('2d');
   tctx.drawImage(canvas, 0, 0);
 
-  // 2) Prepare a 28×28 offscreen canvas
+  // 2. Prepare a 28×28 offscreen canvas
   const small = document.createElement('canvas');
   small.width = small.height = 28;
   const sctx  = small.getContext('2d');
 
-  // a) Fill background black
+  // a. Fill background black
   sctx.fillStyle = 'black';
   sctx.fillRect(0, 0, 28, 28);
 
-  // b) Enable antialiasing and draw scaled-down image
+  // b. Enable antialiasing and draw scaled-down image
   sctx.imageSmoothingEnabled = true;
   sctx.imageSmoothingQuality = 'high';
   sctx.drawImage(temp, 0, 0, 28, 28);
 
-  // c) Extract raw pixels and invert: white strokes → high values
+  // c. Extract raw pixels and invert: white strokes → high values
   let imgData = sctx.getImageData(0, 0, 28, 28).data;
   const flatRaw = new Uint8ClampedArray(784);
   for (let i = 0, j = 0; i < imgData.length; i += 4, j++) {
-    // Since strokes are white (255) on black (0), no invert needed:
     flatRaw[j] = imgData[i];  
   }
 
-  // d) Compute weighted centroid of bright pixels
+  // d. Compute weighted centroid of bright pixels
   let sumX = 0, sumY = 0, total = 0;
   for (let idx = 0; idx < 784; idx++) {
     const v = flatRaw[idx];
@@ -115,7 +112,7 @@ function getCanvasImage28() {
   const cx = sumX / total, cy = sumY / total;
   const shiftX = Math.round(14 - cx), shiftY = Math.round(14 - cy);
 
-  // 3) Redraw centered on black background
+  // 3. Redraw centered on black background
   sctx.fillStyle = 'black';
   sctx.fillRect(0, 0, 28, 28);
   sctx.setTransform(1, 0, 0, 1, shiftX, shiftY);
@@ -133,7 +130,7 @@ function getCanvasImage28() {
 }
 
 
-// 4️⃣ Apply PCA transform (with mean centering)
+// 3️⃣ Apply PCA transform (with mean centering)
 function applyPCA(flatPixels) {
   const nComp = pca.components.length;
   const out   = new Float32Array(nComp);
@@ -149,11 +146,11 @@ function applyPCA(flatPixels) {
 
 
 
-// 5️⃣ Predict function (builds G/H and scores)
+// 4️⃣ Predict function (builds G/H and scores)
 function predictDigit(pcaVec) {
   let best = { digit: null, score: -Infinity };
 
-  // Helper: generate multi-indices
+  // generate multi-indices
   function genMulti(n, d) {
     const out = [];
     function recurse(dim, rem, idx=[]) {
@@ -201,7 +198,7 @@ function predictDigit(pcaVec) {
   return best.digit;
 }
 
-// 6️⃣ Wire up predict button
+// 5️⃣ Wire up predict button
 document.getElementById('predictBtn').addEventListener('click', async () => {
   document.getElementById('prediction').innerText = 'Predicting...';
   if (!pca) await loadArtifacts();

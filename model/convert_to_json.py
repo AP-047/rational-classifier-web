@@ -1,15 +1,20 @@
-# convert_to_json.py
-
 import os
 import pickle
 import json
 
-# Directory containing your PKL files and where JSON will be written
-MODEL_DIR      = "model"
-RFC_PKL_PATH   = os.path.join(MODEL_DIR, "rfc.pkl")
-PCA_PKL_PATH   = os.path.join(MODEL_DIR, "trained_pca.pkl")
-RFC_JSON_PATH  = os.path.join(MODEL_DIR, "rfc.json")
-PCA_JSON_PATH  = os.path.join(MODEL_DIR, "trained_pca.json")
+MODEL_DIR       = "model"
+RFC_PKL_PATH    = os.path.join(MODEL_DIR, "rfc.pkl")
+PCA_PKL_PATH    = os.path.join(MODEL_DIR, "trained_pca.pkl")
+RFC_JSON_PATH   = os.path.join(MODEL_DIR, "rfc.json")
+PCA_JSON_PATH   = os.path.join(MODEL_DIR, "trained_pca.json")
+
+
+def to_list(x):
+    # Convert NumPy arrays or lists to plain Python lists
+    try:
+        return x.tolist()
+    except AttributeError:
+        return list(x)
 
 
 def convert_rfc():
@@ -19,8 +24,8 @@ def convert_rfc():
     rfc_data = {}
     for digit_key, model in pipeline.items():
         rfc_data[digit_key] = {
-            "alpha":        model["alpha"].tolist(),
-            "beta":         model["beta"].tolist(),
+            "alpha":        to_list(model["alpha"]),
+            "beta":         to_list(model["beta"]),
             "n_components": model["n_components"],
             "degree_n":     model["degree_n"],
             "degree_d":     model["degree_d"]
@@ -36,9 +41,9 @@ def convert_pca():
         pca = pickle.load(f)
 
     pca_data = {
-        "components":        pca.components_.tolist(),            # should be [17][784]
-        "mean":              pca.mean_.tolist(),                  # [784]
-        "explained_variance": pca.explained_variance_ratio_.tolist()  # [17]
+        "components":        to_list(pca.components_),
+        "mean":              to_list(pca.mean_),
+        "explained_variance": to_list(pca.explained_variance_ratio_)
     }
 
     with open(PCA_JSON_PATH, "w") as f:
