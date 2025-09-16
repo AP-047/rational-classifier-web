@@ -58,3 +58,9 @@ Developed at Bauhaus-Universität Weimar under supervision of Prof. Dr. Björn R
 Original team: Omar Ghariani, Helen Dawit Weldemichael, Ajay Patil
 GitHub implementation by: [Ajay Patil](https://github.com/AP-047/rclass)
 ```
+Additionally, please cite the following research paper, which provided the theoretical foundation for this project:  
+```plaintext
+Sharon, N., Peiris, V., Sukhorukova, N., & Ugon, J. (2021).
+Flexible rational approximation and its application for matrix functions.
+arXiv:2108.09357. [arXiv link](https://arxiv.org/abs/2108.09357v2)
+```
