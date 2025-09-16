@@ -6,7 +6,7 @@ This project implements a **handwritten digit recognition** web application usin
 
 ### Live Demo
 
-[Visit: https://yourusername.github.io/rational-classifier-web/
+[Visit: Website
 ](https://ap-047.github.io/rational-classifier-web/)
 ---
 
