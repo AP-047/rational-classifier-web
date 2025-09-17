@@ -37,20 +37,20 @@ This project implements a **handwritten digit recognition** web application usin
 ### Future Improvements
 
 - Unfortunately, I no longer have access to the model that achieved the highest accuracy (around 95%), and I currently do not have lab access at the university. With the limited resources available to me, I will focus on optimizing training and compute usage to push the current model’s accuracy beyond 80%.
-- Experiment with deeper polynomial degrees or alternative classifiers.
+- Experiment with deeper polynomial degrees or PCA Components.
 
 ---
 
 ### License
 ## Attribution & Credits
-### Academic Project Background
-This rational function classifier was developed as part of a special project (3rd semester) at the **Chair of Applied Mathematics, Faculty of Civil Engineering, Bauhaus-Universität Weimar** under the supervision of:
+#### Academic Project Background
+This web application builds upon the project "RClass—Classification by Rational Approximation" (2025), which was developed as part of a special research project at the **Chair of Applied Mathematics, Faculty of Civil Engineering, Bauhaus-Universität Weimar** under the supervision of:
 - **Prof. Dr. rer. nat. Björn Rüffer** (Project Supervisor)  
 - **Dr. rer. nat. habil. Michael Schönlein** (Project Examiner)
 
-**Team Approach:** Each member independently developed the rational function classifier using different frameworks (SageMath, SciPy, Gurobi), and the best-performing implementation was selected. The model used in this repository — developed by me using Gurobi.
+**Team Approach:** Each member independently developed the rational function classifier using different frameworks (SageMath, Scikit-learn, Gurobi), and the best-performing implementation was selected. This web application integrates the Gurobi–based model I developed, which delivered the best combination of performance and maintainability.
 
-### Usage & Citation
+#### Usage & Citation
 If you use this model or methodology in your work, please cite:
 ```plaintext
 RClass—Classification by Rational Approximation (2025)
